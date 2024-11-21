@@ -36,7 +36,7 @@
   <header id="header" class="header fixed-top d-flex align-items-center">
 
     <div class="d-flex align-items-center justify-content-between">
-      <a href="index.html" class="logo d-flex align-items-center">
+      <a href="{% url 'home-page' %}" class="logo d-flex align-items-center">
         <img src="{%  static 'img/logo.png' %}" alt="">
         <span class="d-none d-lg-block">NiceAdmin</span>
       </a>
@@ -266,11 +266,24 @@
     <ul class="sidebar-nav" id="sidebar-nav">
 
       <li class="nav-item">
-        <a class="nav-link " href="index.html">
+        <a class="nav-link " href="{% url 'home-page' %}">
           <i class="bi bi-grid"></i>
           <span>Dashboard</span>
         </a>
       </li><!-- End Dashboard Nav -->
+
+        <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#expenses-nav" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-wallet-fill"></i><span>Expenses</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="expenses-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+            <li>
+            <a href={% url 'expenses' %}>
+              <i class="bi bi-circle"></i><span>Expenses</span>
+            </a>
+          </li>
+        </ul>
+      </li><!-- End Forms Nav -->
 
       <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
