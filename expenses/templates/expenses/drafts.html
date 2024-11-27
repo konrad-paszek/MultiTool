@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="pagetitle">
+    <h1>Expense Draft Lists</h1>
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'home-page' %}">Home</a></li>
+            <li class="breadcrumb-item active">Draft Lists</li>
+        </ol>
+    </nav>
+</div><!-- End Page Title -->
+
+<section class="section">
+    <div class="row">
+        <div class="col-lg-12">
+
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Manage Draft Lists</h5>
+                    <p>
+                        Below are the lists of expense drafts. Click on a list to edit its contents or create a new one.
+                    </p>
+
+                    <!-- Form to add a new draft list -->
+                    <div class="mb-4">
+                        <h6>Add New Draft List</h6>
+                        <form method="post" action="{% url 'add-draft-list' %}">
+                            {% csrf_token %}
+                            <div class="row g-3">
+                                <div class="col-md-8">
+                                    <label for="name" class="form-label">Draft List Name</label>
+                                    <input type="text" id="name" name="name" class="form-control" placeholder="Enter list name" required>
+                                </div>
+                                <div class="col-md-4 d-flex align-items-end">
+                                    <button type="submit" class="btn btn-success w-100">Add List</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- End Form -->
+
+                    <!-- Existing Draft Lists -->
+                    <h6>Existing Draft Lists</h6>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for draft_list in draft_lists %}
+                            <tr>
+                                <td>
+                                    <a href="{% url 'draft-detail' draft_list.id %}">
+                                        {{ draft_list.name }}
+                                    </a>
+                                </td>
+                                <td>
+                                    <form method="post" action="{% url 'delete-draft-list' draft_list.id %}" style="display:inline;">
+                                        {% csrf_token %}
+                                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                    </form>
+                                </td>
+                            </tr>
+                            {% empty %}
+                            <tr>
+                                <td colspan="2" class="text-center">No draft lists available.</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    <!-- End Table -->
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+{% endblock %}
