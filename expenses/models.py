@@ -1,3 +1,5 @@
+import calendar
+
 from django.db import models
 
 CATEGORY_CHOICES = (
