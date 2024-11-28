@@ -32,7 +32,7 @@ class ExpenseDraft(models.Model):
 
 class ExpenseList(models.Model):
     month = models.IntegerField(choices=[(i, calendar.month_name[i]) for i in range(1, 13)], help_text="Month (e.g., January, February)")
-    year = models.IntegerField(help_text="Year (e.g., 2024")
+    year = models.IntegerField(help_text="Year (e.g., 2024)")
 
     name = models.CharField(max_length=255, blank=True, editable=False, help_text="Generated automatically as 'Month Year'")
 
@@ -52,7 +52,7 @@ class ExpenseList(models.Model):
         for draft in draft_list.drafts.all():
             Expense.objects.create(
                 title=draft.title,
-                expected_cost=draft_list,
+                expected_cost=draft.expected_cost,
                 deadline=draft.deadline,
                 category=draft.category,
                 expense_list=self
