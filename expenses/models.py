@@ -48,6 +48,16 @@ class ExpenseList(models.Model):
     class Meta:
         ordering = ["-year", "-month"]
 
+    def populate_from_draft(self, draft_list: ExpenseDraftList):
+        for draft in draft_list.drafts.all():
+            Expense.objects.create(
+                title=draft.title,
+                expected_cost=draft.expected_cost,
+                deadline=draft.deadline,
+                category=draft.category,
+                expense_list=self
+            )
+
 
 class Expense(models.Model):
     title = models.CharField(max_length=30)

@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="pagetitle">
+    <h1>Draft List Details</h1>
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'home-page' %}">Home</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'drafts' %}">Draft Lists</a></li>
+            <li class="breadcrumb-item active">{{ draft_list.name }}</li>
+        </ol>
+    </nav>
+</div><!-- End Page Title -->
+
+<section class="section">
+    <div class="row">
+        <div class="col-lg-12">
+
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Draft List: {{ draft_list.name }}</h5>
+                    <p>Below are the expenses in this draft list. You can edit or delete them as needed.</p>
+
+                    <!-- Table of expenses -->
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Expense</th>
+                                <th>Expected Cost</th>
+                                <th>Category</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for draft in draft_list.drafts.all %}
+                            <tr>
+                                <td>{{ draft.title }}</td>
+                                <td>{{ draft.expected_cost }}</td>
+                                <td>{{ draft.category }}</td>
+                                <td>
+                                    <a href="#" class="btn btn-primary btn-sm">Edit</a>
+                                    <form method="post" action="#" style="display:inline;">
+                                        {% csrf_token %}
+                                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                    </form>
+                                </td>
+                            </tr>
+                            {% empty %}
+                            <tr>
+                                <td colspan="4" class="text-center">No expenses in this draft list.</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    <!-- End Table -->
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+{% endblock %}
