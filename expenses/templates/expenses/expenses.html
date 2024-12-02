@@ -19,18 +19,28 @@
           <div class="card">
             <div class="card-body">
               <h5 class="card-title">Datatables</h5>
-              <p>Add lightweight datatables to your project with using the <a href="https://github.com/fiduswriter/Simple-DataTables" target="_blank">Simple DataTables</a> library. Just add <code>.datatable</code> class name to any table you wish to conver to a datatable. Check for <a href="https://fiduswriter.github.io/simple-datatables/demos/" target="_blank">more examples</a>.</p>
+              <p>
+                Add lightweight datatables to your project with using the
+                <a href="https://github.com/fiduswriter/Simple-DataTables" target="_blank">Simple DataTables</a> library.
+                Just add <code>.datatable</code> class name to any table you wish to convert to a datatable.
+                Check for <a href="https://fiduswriter.github.io/simple-datatables/demos/" target="_blank">more examples</a>.
+              </p>
+
+              <!-- Header with Edit Button -->
+              <div class="d-flex justify-content-end mb-3">
+                <a href="#" class="btn btn-primary">Edit All</a>
+              </div>
+              <!-- End Header with Edit Button -->
 
               <!-- Table with stripped rows -->
               <table class="table datatable">
                 <thead>
                   <tr>
-                    <th>Expense
-                    </th>
+                    <th>Expense</th>
                     <th>Expected cost</th>
                     <th>Final cost</th>
                     <th data-type="date" data-format="YYYY/DD/MM">Deadline</th>
-                      <th data-type="date" data-format="YYYY/DD/MM">PayDate</th>
+                    <th data-type="date" data-format="YYYY/DD/MM">PayDate</th>
                     <th>Category</th>
                   </tr>
                 </thead>
@@ -40,9 +50,9 @@
                     <td>{{ expense.title }}</td>
                     <td>{{ expense.expected_cost }}</td>
                     <td>{{ expense.real_cost }}</td>
-                      <td>{{ expense.deadline }}</td>
+                    <td>{{ expense.deadline }}</td>
                     <td>{{ expense.pay_date }}</td>
-                  <td>{{ expense.category }}</td>
+                    <td>{{ expense.category }}</td>
                   </tr>
                 {% endfor %}
                 </tbody>
