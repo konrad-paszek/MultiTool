@@ -16,7 +16,7 @@ CATEGORY_CHOICES = (
 )
 
 class ExpenseDraftList(models.Model):
-    name = models.CharField(max_length=255, default="Default Draft List", help_text="Name of the draft list", unique=True)
+    name = models.CharField(max_length=255, help_text="Name of the draft list", unique=True)
 
     def __str__(self):
         return self.name
@@ -47,6 +47,16 @@ class ExpenseList(models.Model):
 
     class Meta:
         ordering = ["-year", "-month"]
+
+    def populate_from_draft(self, draft_list: ExpenseDraftList):
+        for draft in draft_list.drafts.all():
+            Expense.objects.create(
+                title=draft.title,
+                expected_cost=draft.expected_cost,
+                deadline=draft.deadline,
+                category=draft.category,
+                expense_list=self
+            )
 
 
 class Expense(models.Model):
