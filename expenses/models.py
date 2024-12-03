@@ -16,7 +16,7 @@ CATEGORY_CHOICES = (
 )
 
 class ExpenseDraftList(models.Model):
-    name = models.CharField(max_length=255, default="Default Draft List", help_text="Name of the draft list", unique=True)
+    name = models.CharField(max_length=255, help_text="Name of the draft list", unique=True)
 
     def __str__(self):
         return self.name

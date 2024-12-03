@@ -31,7 +31,7 @@ class DraftListDetailView(DetailView):
     template_name = "expenses/draft-detail.html"
     context_object_name = "draft_list"
 
-class DraftUpdateView(ListView):
+class DraftUpdateView(UpdateView):
     model = ExpenseDraftList
     fields = ["name"]
     success_url = reverse_lazy('drafts')
